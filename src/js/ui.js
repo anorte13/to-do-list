@@ -1,4 +1,5 @@
 import "../styles/styles.css";
+import { openProjctForm } from "./form";
 import headerIcon from "../img/list.png";
 import inboxIcon from "../img/email.png";
 import weekIcon from "../img/calendar.png";
@@ -10,16 +11,25 @@ export function userInterface() {
     const header = document.createElement('div');
     header.id = 'header';
     body.appendChild(header);
+    
+        const logoContainer = document.createElement('div');
+        logoContainer.id = 'logo';
+        header.appendChild(logoContainer);
 
-        const headIcon = document.createElement('img');
-        headIcon.src = headerIcon;
-        headIcon.id = 'img';
-        header.appendChild(headIcon);
+            const headIcon = document.createElement('img');
+            headIcon.src = headerIcon;
+            headIcon.id = 'img';
+            logoContainer.appendChild(headIcon);
 
-        const headerTitle = document.createElement('div');
-        headerTitle.id = 'header-title';
-        headerTitle.textContent = 'ListTrack';
-        header.appendChild(headerTitle);
+            const headerTitle = document.createElement('div');
+            headerTitle.id = 'header-title';
+            headerTitle.textContent = 'ListTrack';
+            logoContainer.appendChild(headerTitle);
+
+        const add = document.createElement('button');
+        add.id = 'add-task';
+        add.textContent = '+';
+        header.appendChild(add);
 
     const container = document.createElement('div');
     container.id = 'container';
@@ -45,6 +55,9 @@ export function userInterface() {
                     const btn = document.createElement('button');
                     btn.id = 'inbox';
                     btn.textContent = 'Inbox';
+                    btn.addEventListener('click', function(){
+
+                    })
                     inboxContainer.appendChild(btn);
 
                 const todayContainer = document.createElement('div');
@@ -59,6 +72,9 @@ export function userInterface() {
                     const btn2 = document.createElement('button');
                     btn2.id = 'today';
                     btn2.textContent = 'Today';
+                    btn2.addEventListener('click', function(){
+
+                    })
                     todayContainer.appendChild(btn2);
 
                 const thisWeekContainer = document.createElement('div');
@@ -73,6 +89,9 @@ export function userInterface() {
                     const btn3 = document.createElement('button');
                     btn3.id = 'this-week';
                     btn3.textContent = 'This Week';
+                    btn3.addEventListener('click', function(){
+
+                    })
                     thisWeekContainer.appendChild(btn3);
 
             const projectsContainer  = document.createElement('div');
@@ -87,9 +106,10 @@ export function userInterface() {
                 const btn4 = document.createElement('button');
                 btn4.id = 'add-project';
                 btn4.textContent = '+ Add Project';
+                btn4.addEventListener('click', function(){
+                    openProjctForm();
+                })
                 projectsContainer.appendChild(btn4);
-
-                
 
         const mainBody = document.createElement('div');
         mainBody.id = 'main-body';
