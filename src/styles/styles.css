@@ -115,18 +115,48 @@ body {
     height: 100%;
 }
 .form-popup {
+    background-color: lightgrey;
+    width: 50%;
+    height: 50%;
+    gap: 20px;
     position: fixed;
     bottom: 50%;
     right: 50%;
-    left: 50%;
-    top: 50%;
+    left: 30%;
+    top: 30%;
+    transition: width 2s, height 4s;
 }
 #form-container {
-    max-width: 300px;
     padding: 10px;
-    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    text-align: center;
 }
-#form-container input[type=text]:focus {
-    background-color: rgb(174, 235, 244);
+#form-title {
+    font-family: "titleFont";
+    font-size: 35px;
+    text-align: start;
+    padding: 1rem;
+}    
+#projectName {
+    font-family: "titleFont";
     outline: none;
+    width: 50%;
+}
+input[type=text] {
+    height: 25px;
+    font-size: 20px;
+    padding: 5px;
+    text-align: left;
+}
+#submitButton, #close-form {
+    font-family: "titleFont";
+    width: 20%;
+    height: 2rem;
+    font-size: 1rem;
+    font-weight: bolder;
+}
+.fade {
+    transition: opacity .15s linear;
 }

@@ -1,37 +1,50 @@
+import { showClass } from "./ui";
+
 export function openProjctForm() {
     const container = document.getElementById('content');
-
+    
     const formBox = document.createElement('div');
     formBox.id = 'form-box';
     formBox.classList.add('form-popup');
     container.appendChild(formBox);
 
         const form = document.createElement('form');
-        form.id = 'form-conatainer'
+        form.id = 'form-container'
+        form.setAttribute('action', '')
+        form.setAttribute('method', 'get');
         formBox.appendChild(form);
 
             const title = document.createElement('div');
             title.textContent = 'New Project';  
+            title.id = "form-title";
             form.appendChild(title);
 
             const projectName = document.createElement('input');
+            projectName.id = 'projectName';
             projectName.setAttribute('type', 'text');
             projectName.setAttribute('name', 'projectName');
             projectName.setAttribute('placeholder', 'Project Name');
 
             const submit = document.createElement("input");
-            submit.setAttribute("type", "submit");
-            submit.setAttribute('value', 'Submit');
+            submit.setAttribute('type', 'button');
+            submit.id = 'submitButton';
+            submit.value = 'Submit';
+            submit.onclick = function(){
+                showClass(projectName.value);
+                removeForm(formBox);
+            }
             form.appendChild(projectName);
             form.appendChild(submit);
 
-            const close = document.createElement('button');
+            const close = document.createElement('input');
+            close.setAttribute('type', 'button');
             close.id = 'close-form';
-            close.addEventListener('click', function(){
-                
-            })
+            close.value = 'Cancel';
+            close.onclick = function(){
+                removeForm(formBox);
+            }
             form.appendChild(close);
-}
-function closeForm() {
-    document.getElementById('form-box').style.display = "none";
-}
+    }
+    export function removeForm(form){
+        form.remove();
+    }

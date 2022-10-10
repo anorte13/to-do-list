@@ -22,4 +22,8 @@ export class Task {
         console.log('Notes: ', this.notes);
     }
 }
-
+export class Project {
+    constructor(title) {
+        this.title = title;
+    }
+}

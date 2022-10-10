@@ -1,10 +1,12 @@
 import "../styles/styles.css";
 import { openProjctForm } from "./form";
+import { Project } from "./task";
 import headerIcon from "../img/list.png";
 import inboxIcon from "../img/email.png";
 import weekIcon from "../img/calendar.png";
 import todayIcon from "../img/today.png"
 
+let formCalled = false;
 export function userInterface() {
     const body = document.getElementById('content');
 
@@ -102,17 +104,27 @@ export function userInterface() {
                 projectHeader.id = 'project-header';
                 projectHeader.textContent = 'Projects';
                 projectsContainer.appendChild(projectHeader);
-
                 const btn4 = document.createElement('button');
                 btn4.id = 'add-project';
                 btn4.textContent = '+ Add Project';
-                btn4.addEventListener('click', function(){
-                    openProjctForm();
-                })
+                btn4.onclick = function(){
+                    if(formCalled === false) {
+                        formCalled = true;
+                        openProjctForm();
+                        return;
+                    }
+                    else if(formCalled === true) {
+                        formCalled = false;
+                        console.log('Form is aleady open');
+                    }
+                }
                 projectsContainer.appendChild(btn4);
 
         const mainBody = document.createElement('div');
         mainBody.id = 'main-body';
-        mainBody.textContent = 'Main Body'
         container.appendChild(mainBody);
+}
+export function showClass(name) {
+    const project = new Project(name);
+    console.log(project);
 }
