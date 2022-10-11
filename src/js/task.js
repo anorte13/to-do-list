@@ -1,5 +1,5 @@
 export class Task {
-    constructor(title, description, dueDate, priority, notes){
+    constructor(title, description, dueDate, priority, notes, project){
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
@@ -21,9 +21,14 @@ export class Task {
     getNotes() {
         console.log('Notes: ', this.notes);
     }
+    getProject() {
+        console.log('Hello');
+    }
 }
 export class Project {
-    constructor(title) {
+    constructor(title,task) {
         this.title = title;
+        this.task = task;
     }
+
 }

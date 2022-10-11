@@ -75,7 +75,7 @@ body {
     margin-left: 5px;
     gap: 2rem;
 }
-#inbox, #today, #this-week, #add-project {
+#inbox, #today, #this-week, #add-project, #project-name {
     text-align: left;
     border: none;
     border-radius: 0.5rem;
@@ -101,20 +101,19 @@ body {
     cursor: pointer;
     background-color: rgb(19, 185, 185);
 }
-#inbox:hover, #today:hover, #this-week:hover, #add-project:hover   {
+#inbox:hover, #today:hover, #this-week:hover, #add-project:hover, #project-name  {
     background-color: rgb(229, 229, 229);
     cursor: pointer;
 }
-#project-header {
+#projects-header {
     font-size: 1.7rem;
-
 }
 #main-body {
     background-color: white;
     width: 70%;
     height: 100%;
 }
-.form-popup {
+.form-popup, .task-popup {
     background-color: lightgrey;
     width: 50%;
     height: 50%;
@@ -132,17 +131,23 @@ body {
     flex-direction: column;
     gap: 60px;
     text-align: center;
+    background-color: lightgray;
 }
-#form-title {
+#form-title, #task-title {
     font-family: "titleFont";
     font-size: 35px;
     text-align: start;
     padding: 1rem;
 }    
-#projectName {
+#projectName, #taskName {
     font-family: "titleFont";
     outline: none;
     width: 50%;
+}
+#projectHeader {
+    text-align: center;
+    padding: 2rem;
+    font-family: 'titleFont';
 }
 input[type=text] {
     height: 25px;
@@ -159,4 +164,11 @@ input[type=text] {
 }
 .fade {
     transition: opacity .15s linear;
+}
+#project-header {
+    text-align: center;
+    font-family: 'titleFont';
+    padding: 2rem;
+    font-size: 1.5rem;
+    
 }

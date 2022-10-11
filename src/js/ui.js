@@ -5,6 +5,8 @@ import headerIcon from "../img/list.png";
 import inboxIcon from "../img/email.png";
 import weekIcon from "../img/calendar.png";
 import todayIcon from "../img/today.png"
+import { Task } from "../js/task";
+import { openTaskForm } from "../js/taskForm";
 
 let formCalled = false;
 export function userInterface() {
@@ -31,6 +33,9 @@ export function userInterface() {
         const add = document.createElement('button');
         add.id = 'add-task';
         add.textContent = '+';
+        add.onclick = function() {
+            openTaskForm();
+        }
         header.appendChild(add);
 
     const container = document.createElement('div');
@@ -101,7 +106,7 @@ export function userInterface() {
             sidebar.appendChild(projectsContainer);
 
                 const projectHeader = document.createElement('div');
-                projectHeader.id = 'project-header';
+                projectHeader.id = 'projects-header';
                 projectHeader.textContent = 'Projects';
                 projectsContainer.appendChild(projectHeader);
                 const btn4 = document.createElement('button');
@@ -119,12 +124,28 @@ export function userInterface() {
                     }
                 }
                 projectsContainer.appendChild(btn4);
-
         const mainBody = document.createElement('div');
         mainBody.id = 'main-body';
         container.appendChild(mainBody);
 }
-export function showClass(name) {
-    const project = new Project(name);
-    console.log(project);
+export function addProject(name) {
+    const projectButton = document.createElement('button');
+    const projectHolder = document.getElementById('project-container');
+    projectButton.textContent = name;
+    projectButton.id = 'project-name';
+    projectButton.onclick = function(){
+        showProjects(projectButton.textContent);
+    }
+    projectHolder.appendChild(projectButton);
+    }
+function showProjects(title) {
+    const mainBody = document.getElementById('main-body');
+    const projectHeader = document.createElement('div');
+    projectHeader.id = 'project-header';
+    projectHeader.textContent = title;
+    mainBody.appendChild(projectHeader);  
+}
+function createNewTask(title, description, dueDate, priority, notes, project) {
+    const newTask = new Task()
+
 }

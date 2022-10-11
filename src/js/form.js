@@ -1,4 +1,4 @@
-import { showClass } from "./ui";
+import { addProject } from "./ui";
 
 export function openProjctForm() {
     const container = document.getElementById('content');
@@ -30,7 +30,7 @@ export function openProjctForm() {
             submit.id = 'submitButton';
             submit.value = 'Submit';
             submit.onclick = function(){
-                showClass(projectName.value);
+                addProject(projectName.value);
                 removeForm(formBox);
             }
             form.appendChild(projectName);
