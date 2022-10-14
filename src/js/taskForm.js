@@ -1,5 +1,7 @@
 import { removeForm } from "./form";
 import { createNewTask } from "./ui";
+import { projects } from "./ui";
+
 export function openTaskForm() {
     const container = document.getElementById('content');
     
@@ -87,8 +89,6 @@ export function openTaskForm() {
                 selected.onchange = onChange;
                 onChange();
 
-                
-
             const projectsContainer = document.createElement('div');
             projectsContainer.id = 'projects-container';
             formBody2.appendChild(projectsContainer);
@@ -101,14 +101,20 @@ export function openTaskForm() {
                 projectList.id = 'projects';
                 projectsContainer.appendChild(projectList);
 
-                let projectArray = ['Hello', 'Clean attic', 'Clean house'];
-
-                for (let i = 0; i < projectArray.length; i++){
+                for (let i = 0; i < projects.length; i++){
                     let projectSelect = document.createElement('option');
-                    projectSelect.value = projectArray[i];
-                    projectSelect.text = projectArray[i];
+                    projectSelect.value = projects[i].title;
+                    projectSelect.text = projects[i].title;
                     projectList.appendChild(projectSelect);
                 }
+
+                let selectedProject = document.getElementById('projects');
+                function onChangeProjects(){
+                    let value2 = selectedProject.value;
+                    return value2;
+                }
+                selectedProject.onchange = onChangeProjects;
+                onChangeProjects();
             
             const submitContainer = document.createElement('div');
             submitContainer.id = 'submit-container';
@@ -119,10 +125,23 @@ export function openTaskForm() {
             submit.id = 'submitButton';
             submit.value = 'Submit';
             submit.onclick = function(){
-                createNewTask(task.value, description.value, '10/28/2022', onChange(), 'Clean the attic');
+                createNewTask(task.value, description.value, '10/28/2022', onChange(), onChangeProjects());
                 removeForm(formBox);
             }
             submitContainer.appendChild(submit);
+
+        const closeContatiner = document.createElement('div');
+        closeContatiner.id = 'close-container';
+        formBody2.appendChild(closeContatiner)
+
+            const close = document.createElement('input');
+            close.setAttribute('type', 'button');
+            close.id = 'close-form';
+            close.value = 'Cancel';
+            close.onclick = function(){
+                removeForm(formBox);
+            }
+            closeContatiner.appendChild(close);
 }
 
 

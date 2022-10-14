@@ -149,7 +149,7 @@ export function createNewTask(title, description, dueDate, priority, project) {
     const newTask = new Task(title, description, dueDate, priority, project);
     console.log(newTask);
 }
-let projects = [];
+export let projects = [];
 export function createNewForm(title) {
     const newProject = new Project(title);
     projects.push(newProject);
