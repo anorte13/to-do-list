@@ -1,5 +1,5 @@
 import { addProject } from "./ui";
-
+import { createNewForm } from "./ui";
 export function openProjctForm() {
     const container = document.getElementById('content');
     
@@ -31,6 +31,7 @@ export function openProjctForm() {
             submit.value = 'Submit';
             submit.onclick = function(){
                 addProject(projectName.value);
+                createNewForm(projectName.value);
                 removeForm(formBox);
             }
             form.appendChild(projectName);

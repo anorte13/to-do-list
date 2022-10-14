@@ -137,7 +137,7 @@ body {
     font-family: "titleFont";
     font-size: 35px;
     text-align: start;
-    padding: 1rem;
+    padding: 10px;
 }    
 #projectName, #taskName {
     font-family: "titleFont";
@@ -151,9 +151,12 @@ body {
 }
 input[type=text] {
     height: 25px;
-    font-size: 20px;
+    font-size: 16px;
+    font-family: 'titleFont';
     padding: 5px;
     text-align: left;
+    border-radius: 5px;
+    border: 0.2px solid black;
 }
 #submitButton, #close-form {
     font-family: "titleFont";
@@ -170,5 +173,40 @@ input[type=text] {
     font-family: 'titleFont';
     padding: 2rem;
     font-size: 1.5rem;
-    
+}
+
+#title-container, #description-container, #priority-container, #projects-container, #submit-container {
+    font-family: 'titleFont';
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 5px;
+    gap: 5px;
+}
+textarea {
+    font-family: 'titleFont';
+    height: 90px;
+    font-size: 16px;
+    padding: 5px;
+    text-align: left;
+    border-radius: 5px;
+    border: 0.2px solid black;
+    overflow: auto;
+}
+select {
+    height: 30px;
+    font-size: 16px;
+    font-family: 'titleFont';
+}
+#form-body {
+    padding: 10px;
+    width: 100%;
+}
+#task-body {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+#task-container {
+    height: 100%;
 }
