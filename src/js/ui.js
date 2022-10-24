@@ -1,14 +1,13 @@
 import "../styles/styles.css";
 import { openProjctForm } from "./form";
-import { Project } from "./task";
 import headerIcon from "../img/list.png";
 import inboxIcon from "../img/email.png";
 import weekIcon from "../img/calendar.png";
 import todayIcon from "../img/today.png"
-import { Task } from "../js/task";
-import { openTaskForm } from "../js/taskForm";
-
-let formCalled = false;
+import { openTaskForm, tasks } from "../js/taskForm";
+import { Project } from "./task";
+import { addHeader, addTasks, createBody, removeContent } from "./load";
+export let projects = [];
 export function userInterface() {
     const body = document.getElementById('content');
 
@@ -62,9 +61,13 @@ export function userInterface() {
                     const btn = document.createElement('button');
                     btn.id = 'inbox';
                     btn.textContent = 'Inbox';
+                    const inboxObject = new Project(btn.textContent);
+                    projects.push(inboxObject);
                     btn.addEventListener('click', function(){
-
+                        removeContent();
+                        addHeader(inboxObject.title);
                     })
+                    
                     inboxContainer.appendChild(btn);
 
                 const todayContainer = document.createElement('div');
@@ -79,10 +82,14 @@ export function userInterface() {
                     const btn2 = document.createElement('button');
                     btn2.id = 'today';
                     btn2.textContent = 'Today';
+                    const todayObject = new Project(btn2.textContent)
+                    projects.push(todayObject);
                     btn2.addEventListener('click', function(){
-
-                    })
+                        removeContent();
+                       addHeader(todayObject.title);
+                    });
                     todayContainer.appendChild(btn2);
+                    
 
                 const thisWeekContainer = document.createElement('div');
                 thisWeekContainer.id = 'week-box';
@@ -96,10 +103,14 @@ export function userInterface() {
                     const btn3 = document.createElement('button');
                     btn3.id = 'this-week';
                     btn3.textContent = 'This Week';
+                    const weekObject = new Project(btn3.textContent);
+                    projects.push(weekObject);
                     btn3.addEventListener('click', function(){
-
+                        removeContent();
+                        addHeader(weekObject.title);
                     })
                     thisWeekContainer.appendChild(btn3);
+                    
 
             const projectsContainer  = document.createElement('div');
             projectsContainer.id = 'project-container';
@@ -113,45 +124,22 @@ export function userInterface() {
                 btn4.id = 'add-project';
                 btn4.textContent = '+ Add Project';
                 btn4.onclick = function(){
-                    if(formCalled === false) {
-                        formCalled = true;
                         openProjctForm();
-                        return;
                     }
-                    else if(formCalled === true) {
-                        formCalled = false;
-                        console.log('Form is aleady open');
-                    }
-                }
                 projectsContainer.appendChild(btn4);
         const mainBody = document.createElement('div');
         mainBody.id = 'main-body';
         container.appendChild(mainBody);
+    createBody(todayObject);
 }
 export function addProject(name) {
     const projectButton = document.createElement('button');
     const projectHolder = document.getElementById('project-container');
-    projectButton.textContent = name;
+    projectButton.textContent = name.title;
     projectButton.id = 'project-name';
     projectButton.onclick = function(){
-        showProjects(projectButton.textContent);
+        removeContent();
+        addHeader(name.title);
     }
     projectHolder.appendChild(projectButton);
     }
-function showProjects(title) {
-    const mainBody = document.getElementById('main-body');
-    const projectHeader = document.createElement('div');
-    projectHeader.id = 'project-header';
-    projectHeader.textContent = title;
-    mainBody.appendChild(projectHeader);  
-}
-export function createNewTask(title, description, dueDate, priority, project) {
-    const newTask = new Task(title, description, dueDate, priority, project);
-    console.log(newTask);
-}
-export let projects = [];
-export function createNewForm(title) {
-    const newProject = new Project(title);
-    projects.push(newProject);
-    console.log(projects);
-}

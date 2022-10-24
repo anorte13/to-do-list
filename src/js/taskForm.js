@@ -1,8 +1,17 @@
 import { removeForm } from "./form";
-import { createNewTask } from "./ui";
+import { addTasks } from "./load";
+import { Project, Task } from "./task";
 import { projects } from "./ui";
 
+export let tasks = [];
 export function openTaskForm() {
+    const head = document.getElementById('header');
+    head.classList.remove('form-removed');
+    head.classList.add('form-pop');
+    const contain = document.getElementById('container');
+    contain.classList.remove('form-removed');
+    contain.classList.add('form-pop');
+
     const container = document.getElementById('content');
     
     const formBox = document.createElement('div');
@@ -92,11 +101,9 @@ export function openTaskForm() {
             const projectsContainer = document.createElement('div');
             projectsContainer.id = 'projects-container';
             formBody2.appendChild(projectsContainer);
-
                 const project = document.createElement('label');
                 project.textContent = 'Project: ';
                 projectsContainer.appendChild(project);
-                
                 const projectList = document.createElement('select');
                 projectList.id = 'projects';
                 projectsContainer.appendChild(projectList);
@@ -107,7 +114,6 @@ export function openTaskForm() {
                     projectSelect.text = projects[i].title;
                     projectList.appendChild(projectSelect);
                 }
-
                 let selectedProject = document.getElementById('projects');
                 function onChangeProjects(){
                     let value2 = selectedProject.value;
@@ -115,7 +121,6 @@ export function openTaskForm() {
                 }
                 selectedProject.onchange = onChangeProjects;
                 onChangeProjects();
-            
             const submitContainer = document.createElement('div');
             submitContainer.id = 'submit-container';
             formBody2.appendChild(submitContainer);
@@ -125,11 +130,15 @@ export function openTaskForm() {
             submit.id = 'submitButton';
             submit.value = 'Submit';
             submit.onclick = function(){
-                createNewTask(task.value, description.value, '10/28/2022', onChange(), onChangeProjects());
+                addToProject(task.value, description.value, '10/28/2022', onChange(), onChangeProjects());
+                head.classList.remove('form-pop');
+                contain.classList.remove('form-pop');
+                head.classList.add('form-removed');
+                contain.classList.add('form-removed');
+                formBox.classList.add('task-popin');
                 removeForm(formBox);
             }
             submitContainer.appendChild(submit);
-
         const closeContatiner = document.createElement('div');
         closeContatiner.id = 'close-container';
         formBody2.appendChild(closeContatiner)
@@ -139,11 +148,24 @@ export function openTaskForm() {
             close.id = 'close-form';
             close.value = 'Cancel';
             close.onclick = function(){
+                head.classList.remove('form-pop');
+                contain.classList.remove('form-pop');
+                head.classList.add('form-removed');
+                contain.classList.add('form-removed');
+                formBox.classList.add('task-popin');
                 removeForm(formBox);
             }
             closeContatiner.appendChild(close);
 }
-
-
-
-                
+let parsedTitle;
+export function addToProject(title, description, date, priority, project){
+    for(let i = 0; i < projects.length; i++){
+        if(projects[i].title === `${project}`){
+            parsedTitle = project;
+            parsedTitle = parsedTitle.replace(/\s/g, '');
+            const newTask = new Task(title, description, date, priority, project);
+            tasks.push(newTask);
+            addTasks(projects[i], newTask, parsedTitle);
+        }
+}
+}

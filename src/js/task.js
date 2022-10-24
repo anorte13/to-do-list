@@ -6,27 +6,26 @@ export class Task {
         this.priority = priority;
         this.project = project;
     }
-    getTitle() {
-        console.log('Task: ', this.title);
+    projects = [];
+
+    addToProject(obj){
+        this.projects.push(obj);
     }
-    getDescription() {
-        console.log('Description: ', this.description);
-    }
-    getDueDate() {
-        console.log('Due: ', this.dueDate);
-    }
-    getPriority() {
-        console.log('Priority: ', this.priority);
-    }
-    getNotes() {
-        console.log('Notes: ', this.notes);
-    }
-    getProject() {
-        console.log('Hello');
+    getProjects() {
+        return this.projects;
     }
 }
 export class Project {
-    constructor(title) {
+    constructor(title, task) {
         this.title = title;
+        this.task = task;
+    }
+    taskList = [];
+
+    addTasks(task){
+        this.taskList.push(task);
+    }
+    getTaskList() {
+        return this.taskList;
     }
 }

@@ -1,16 +1,24 @@
-import { addProject } from "./ui";
-import { createNewForm } from "./ui";
+import { Project } from "./task";
+import { addProject, projects } from "./ui";
+
 export function openProjctForm() {
     const container = document.getElementById('content');
-    
+
+    const head = document.getElementById('header');
+    head.classList.remove('form-removed');
+    head.classList.add('form-pop');
+    const contain = document.getElementById('container');
+    contain.classList.remove('form-removed');
+    contain.classList.add('form-pop');
+
     const formBox = document.createElement('div');
     formBox.id = 'form-box';
-    formBox.classList.add('form-popup');
+    formBox.classList.add('task-popup');
     container.appendChild(formBox);
 
         const form = document.createElement('form');
         form.id = 'form-container'
-        form.setAttribute('action', '')
+        form.setAttribute('action', '');
         form.setAttribute('method', 'get');
         formBox.appendChild(form);
 
@@ -19,19 +27,28 @@ export function openProjctForm() {
             title.id = "form-title";
             form.appendChild(title);
 
+            let messages = [];
+            const error = document.createElement('div');
+            error.id = 'error'
+
             const projectName = document.createElement('input');
             projectName.id = 'projectName';
             projectName.setAttribute('type', 'text');
             projectName.setAttribute('name', 'projectName');
-            projectName.setAttribute('placeholder', 'Project Name');
+            projectName.setAttribute('required', 'required');
 
             const submit = document.createElement("input");
-            submit.setAttribute('type', 'button');
+            submit.setAttribute('type', 'submit');
             submit.id = 'submitButton';
             submit.value = 'Submit';
             submit.onclick = function(){
-                addProject(projectName.value);
-                createNewForm(projectName.value);
+                const project = new Project(projectName.value);
+                projects.push(project);
+                addProject(project);
+                head.classList.remove('form-pop');
+                contain.classList.remove('form-pop');
+                head.classList.add('form-removed');
+                contain.classList.add('form-removed');
                 removeForm(formBox);
             }
             form.appendChild(projectName);
@@ -42,6 +59,10 @@ export function openProjctForm() {
             close.id = 'close-form';
             close.value = 'Cancel';
             close.onclick = function(){
+                head.classList.remove('form-pop');
+                contain.classList.remove('form-pop');
+                head.classList.add('form-removed');
+                contain.classList.add('form-removed');
                 removeForm(formBox);
             }
             form.appendChild(close);
@@ -49,3 +70,4 @@ export function openProjctForm() {
     export function removeForm(form){
         form.remove();
     }
+    
