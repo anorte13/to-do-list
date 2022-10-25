@@ -64,7 +64,6 @@ export function userInterface() {
                     const inboxObject = new Project(btn.textContent);
                     projects.push(inboxObject);
                     btn.addEventListener('click', function(){
-                        removeContent();
                         addHeader(inboxObject.title);
                     })
                     
@@ -85,7 +84,6 @@ export function userInterface() {
                     const todayObject = new Project(btn2.textContent)
                     projects.push(todayObject);
                     btn2.addEventListener('click', function(){
-                        removeContent();
                        addHeader(todayObject.title);
                     });
                     todayContainer.appendChild(btn2);
@@ -106,7 +104,6 @@ export function userInterface() {
                     const weekObject = new Project(btn3.textContent);
                     projects.push(weekObject);
                     btn3.addEventListener('click', function(){
-                        removeContent();
                         addHeader(weekObject.title);
                     })
                     thisWeekContainer.appendChild(btn3);
@@ -138,7 +135,6 @@ export function addProject(name) {
     projectButton.textContent = name.title;
     projectButton.id = 'project-name';
     projectButton.onclick = function(){
-        removeContent();
         addHeader(name.title);
     }
     projectHolder.appendChild(projectButton);

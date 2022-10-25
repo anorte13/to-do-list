@@ -22,9 +22,11 @@ export function addHeader(obj){
     main.appendChild(projectHeader);
     return projectHeader;
 }
+let taskArray = [];
 export function addTasks(projectItem, tasks, project){
    const taskContainer = document.getElementById('task-containers');
    const title = document.getElementById(`${project}`);
+   
    if(title){
     const wrapper = document.createElement('div');
     wrapper.id = 'wrapper';
@@ -33,8 +35,13 @@ export function addTasks(projectItem, tasks, project){
         const task = document.createElement('div');
         task.id = 'container_';
         task.addEventListener('click', function(){
-            if(collapseContainer.display == 'none'){
-                collapseContainer.classList.add('collapse-container-show')
+            if(collapseContainer.classList.contains('collapse-container-hidden')){
+                collapseContainer.classList.remove('collapse-container-hidden');
+                collapseContainer.classList.add('collapse-container-show');
+            }
+            else if(collapseContainer.classList.contains('collapse-container-show')){
+                collapseContainer.classList.remove('collapse-container-show');
+                collapseContainer.classList.add('collapse-container-hidden');
             }
         });
         wrapper.appendChild(task);
@@ -64,6 +71,10 @@ export function addTasks(projectItem, tasks, project){
                     const deleteButton = document.createElement('button');
                     deleteButton.id = 'delete-button';
                     deleteButton.textContent = 'Delete'
+                    deleteButton.addEventListener('click', function(){
+                        console.log('Button was pressed')
+                        removeFromList(wrapper);
+                    })
                     taskControls.appendChild(deleteButton);
 
         const collapseContainer = document.createElement('div');
@@ -140,11 +151,14 @@ export function addTasks(projectItem, tasks, project){
                         descriptionText.textContent = tasks.description;
                         collapseDescriptionContainer.appendChild(descriptionText);
 
+    taskArray.push(wrapper);
+    console.log(taskArray);
    }
    else 
     console.log('Element doesnt exist');
 }
-export function removeContent() {
-    
-   
-}
+export function removeFromList(task) {
+        let index = taskArray.indexOf(task);
+        taskArray.splice(index, 1);
+        task.remove();
+   }

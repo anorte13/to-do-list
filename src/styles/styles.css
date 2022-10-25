@@ -271,7 +271,7 @@ select {
     cursor: pointer;
 }
 #container-left{
-
+    
 }
 #form-check {
     display: flex;
@@ -335,6 +335,7 @@ left-collapse-container {
 }
 .collapse-container-show {
     display: block;
+    transition: all .5s ease-in-out;
 }
 
 
