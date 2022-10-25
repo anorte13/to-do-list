@@ -20,9 +20,8 @@ export function addHeader(obj){
     projectHeader.id = projectTitle;
     projectHeader.textContent = obj;
     main.appendChild(projectHeader);
-    return projectHeader;
 }
-let taskArray = [];
+export let taskArray = [];
 export function addTasks(projectItem, tasks, project){
    const taskContainer = document.getElementById('task-containers');
    const title = document.getElementById(`${project}`);
@@ -152,13 +151,22 @@ export function addTasks(projectItem, tasks, project){
                         collapseDescriptionContainer.appendChild(descriptionText);
 
     taskArray.push(wrapper);
-    console.log(taskArray);
    }
    else 
     console.log('Element doesnt exist');
 }
-export function removeFromList(task) {
+function removeFromList(task) {
         let index = taskArray.indexOf(task);
         taskArray.splice(index, 1);
         task.remove();
-   }
+}
+export function removeCurrentInfo(element){
+    saveCurrentPage(element)
+    const taskContainer = document.getElementById('task-containers');
+    const main = document.getElementById('header-container');
+    main.remove()
+    taskContainer.remove();
+}
+function saveCurrentPage(element){
+    console.log(element);
+}

@@ -178,7 +178,7 @@ input[type=text] {
     padding: 2rem;
     font-size: 1.5rem;
 }
-#title-container, #description-container, #priority-container, #projects-container, #submit-container, #close-container {
+#title-container, #description-container, #priority-container, #projects-container, #submit-container, #close-container, #date-container {
     font-family: 'titleFont';
     display: flex;
     flex-direction: column;

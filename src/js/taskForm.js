@@ -2,6 +2,9 @@ import { removeForm } from "./form";
 import { addTasks } from "./load";
 import { Project, Task } from "./task";
 import { projects } from "./ui";
+import { format } from "date-fns";
+
+//const newDueDate = format(new Date(this.value), 'dd/MM/yyyy')
 
 export let tasks = [];
 export function openTaskForm() {
@@ -98,6 +101,24 @@ export function openTaskForm() {
                 selected.onchange = onChange;
                 onChange();
 
+            const dateContainer = document.createElement('div');
+            dateContainer.id = 'date-container';
+            formBody2.appendChild(dateContainer);
+                
+                const dateTitle = document.createElement('label');
+                dateTitle.textContent = 'Due Date: ';
+                dateContainer.appendChild(dateTitle);
+
+                const date = document.createElement('input');
+                date.id = 'date';
+                date.setAttribute('type', 'text');
+                date.setAttribute('name', 'date');
+                dateContainer.appendChild(date);
+
+                
+                
+                
+
             const projectsContainer = document.createElement('div');
             projectsContainer.id = 'projects-container';
             formBody2.appendChild(projectsContainer);
@@ -130,7 +151,10 @@ export function openTaskForm() {
             submit.id = 'submitButton';
             submit.value = 'Submit';
             submit.onclick = function(){
-                addToProject(task.value, description.value, '10/28/2022', onChange(), onChangeProjects());
+                const selectedDate = new Date(`${date.value}`);
+                const formattedDate = format(selectedDate, 'MM/dd/yyyy');
+                console.log(formattedDate);
+                addToProject(task.value, description.value, formattedDate , onChange(), onChangeProjects());
                 head.classList.remove('form-pop');
                 contain.classList.remove('form-pop');
                 head.classList.add('form-removed');

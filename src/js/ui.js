@@ -6,7 +6,9 @@ import weekIcon from "../img/calendar.png";
 import todayIcon from "../img/today.png"
 import { openTaskForm, tasks } from "../js/taskForm";
 import { Project } from "./task";
-import { addHeader, addTasks, createBody, removeContent } from "./load";
+import { addHeader, addTasks, createBody, removeCurrentInfo, taskArray } from "./load";
+
+
 export let projects = [];
 export function userInterface() {
     const body = document.getElementById('content');
@@ -64,9 +66,10 @@ export function userInterface() {
                     const inboxObject = new Project(btn.textContent);
                     projects.push(inboxObject);
                     btn.addEventListener('click', function(){
+                        removeCurrentInfo()
+                        createBody(inboxObject);
                         addHeader(inboxObject.title);
                     })
-                    
                     inboxContainer.appendChild(btn);
 
                 const todayContainer = document.createElement('div');
@@ -84,6 +87,8 @@ export function userInterface() {
                     const todayObject = new Project(btn2.textContent)
                     projects.push(todayObject);
                     btn2.addEventListener('click', function(){
+                       removeCurrentInfo()
+                       createBody(todayObject)
                        addHeader(todayObject.title);
                     });
                     todayContainer.appendChild(btn2);
@@ -104,6 +109,8 @@ export function userInterface() {
                     const weekObject = new Project(btn3.textContent);
                     projects.push(weekObject);
                     btn3.addEventListener('click', function(){
+                        removeCurrentInfo()
+                        createBody(weekObject)
                         addHeader(weekObject.title);
                     })
                     thisWeekContainer.appendChild(btn3);
@@ -128,6 +135,7 @@ export function userInterface() {
         mainBody.id = 'main-body';
         container.appendChild(mainBody);
     createBody(todayObject);
+    addHeader(todayObject.title);
 }
 export function addProject(name) {
     const projectButton = document.createElement('button');
