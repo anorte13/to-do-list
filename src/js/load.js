@@ -1,4 +1,3 @@
-import { addToProject, tasks } from "./taskForm";
 
 export function createBody(){
     const main = document.getElementById('main-body');
@@ -149,6 +148,20 @@ export function addTasks(projectItem, tasks, project){
                         descriptionText.id = 'right-collapse';
                         descriptionText.textContent = tasks.description;
                         collapseDescriptionContainer.appendChild(descriptionText);
+
+                    const collapseContainerProject = document.createElement('div');
+                    collapseContainerProject.id = 'project-collapse-container';
+                    collapseInfoRight.appendChild(collapseContainerProject);
+
+                        const projectLabel = document.createElement('div');
+                        projectLabel.id = 'right-collapse';
+                        projectLabel.textContent = 'Project: ';
+                        collapseContainerProject.appendChild(projectLabel);
+
+                        const projectText = document.createElement('div');
+                        projectText.id = 'right-collapse';
+                        projectText.textContent = tasks.project;
+                        collapseContainerProject.appendChild(projectText);
 
     taskArray.push(wrapper);
    }

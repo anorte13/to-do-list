@@ -1,11 +1,8 @@
 import { removeForm } from "./form";
 import { addTasks } from "./load";
-import { Project, Task } from "./task";
+import { Task } from "./task";
 import { projects } from "./ui";
 import { format } from "date-fns";
-
-//const newDueDate = format(new Date(this.value), 'dd/MM/yyyy')
-
 export let tasks = [];
 export function openTaskForm() {
     const head = document.getElementById('header');
@@ -24,8 +21,6 @@ export function openTaskForm() {
 
         const form = document.createElement('form');
         form.id = 'task-container'
-        form.setAttribute('action', '')
-        form.setAttribute('method', 'get');
         formBox.appendChild(form);
 
             const title = document.createElement('div');
@@ -69,7 +64,7 @@ export function openTaskForm() {
                     description.setAttribute('name', 'description');
                     descriptionContainer.appendChild(description);
 
-            const formBody2 = document.createElement('div')
+            const formBody2 = document.createElement('div');
             formBody2.id = 'form-body'
             bodyContainer.appendChild(formBody2);
 
@@ -115,10 +110,6 @@ export function openTaskForm() {
                 date.setAttribute('name', 'date');
                 dateContainer.appendChild(date);
 
-                
-                
-                
-
             const projectsContainer = document.createElement('div');
             projectsContainer.id = 'projects-container';
             formBody2.appendChild(projectsContainer);
@@ -142,6 +133,7 @@ export function openTaskForm() {
                 }
                 selectedProject.onchange = onChangeProjects;
                 onChangeProjects();
+
             const submitContainer = document.createElement('div');
             submitContainer.id = 'submit-container';
             formBody2.appendChild(submitContainer);
@@ -151,18 +143,10 @@ export function openTaskForm() {
             submit.id = 'submitButton';
             submit.value = 'Submit';
             submit.onclick = function(){
-                const selectedDate = new Date(`${date.value}`);
-                const formattedDate = format(selectedDate, 'MM/dd/yyyy');
-                console.log(formattedDate);
-                addToProject(task.value, description.value, formattedDate , onChange(), onChangeProjects());
-                head.classList.remove('form-pop');
-                contain.classList.remove('form-pop');
-                head.classList.add('form-removed');
-                contain.classList.add('form-removed');
-                formBox.classList.add('task-popin');
-                removeForm(formBox);
+                validateForm(task.value, description.value, date.value, onChange(), onChangeProjects());
             }
             submitContainer.appendChild(submit);
+            
         const closeContatiner = document.createElement('div');
         closeContatiner.id = 'close-container';
         formBody2.appendChild(closeContatiner)
@@ -182,6 +166,7 @@ export function openTaskForm() {
             closeContatiner.appendChild(close);
 }
 let parsedTitle;
+
 export function addToProject(title, description, date, priority, project){
     for(let i = 0; i < projects.length; i++){
         if(projects[i].title === `${project}`){
@@ -191,5 +176,48 @@ export function addToProject(title, description, date, priority, project){
             tasks.push(newTask);
             addTasks(projects[i], newTask, parsedTitle);
         }
+    }
 }
+function validateForm(task, description, date, priority, project) {
+    let userInput = document.getElementById('task');
+    let userDate = document.getElementById('date');
+    const head = document.getElementById('header');
+    const contain = document.getElementById('container');
+    const box = document.getElementById('task-box');
+    if(userInput.value == ''){
+        alert('Please enter task title');
+        return;
+    }
+    if(userDate.value === ''){
+        alert('Please enter a date for task');
+        return;
+    }
+    else if(userInput.value !== '' && userDate.value !== ''){
+        const selectedDate = new Date(`${date}`);
+        const formattedDate = format(selectedDate, 'MM/dd/yyyy');
+        addToProject(task, description, formattedDate, priority, project);
+        head.classList.remove('form-pop');
+        contain.classList.remove('form-pop');
+        head.classList.add('form-removed');
+        contain.classList.add('form-removed');
+        box.classList.add('task-popin');
+        removeForm(box);
+    }
 }
+
+
+
+//(task, description, date, priority, project){
+    //const head = document.getElementById('header');
+    //const contain = document.getElementById('container');
+   // const formBox = document.createElement('div');
+
+    //let x = document.forms["myForm"]["task"].value;
+
+   // if(x === ""){
+        //console.log('Please enter information in the fields.')
+        //return false;
+   // } else {
+        //console.log('Everything looks good!');
+       // 
+    //}

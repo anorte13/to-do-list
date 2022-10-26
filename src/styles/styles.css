@@ -317,7 +317,7 @@ left-collapse-container {
     flex-direction: row;
     gap: 1rem;
 }
-#collapse-title-container, #collapse-description-container, #collapse-priority-container, #collapse-due-date-container {
+#collapse-title-container, #collapse-description-container, #collapse-priority-container, #collapse-due-date-container, #project-collapse-container {
     display: flex;
     flex-direction: row;
     gap: 1rem;

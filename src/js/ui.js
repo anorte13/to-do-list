@@ -128,7 +128,7 @@ export function userInterface() {
                 btn4.id = 'add-project';
                 btn4.textContent = '+ Add Project';
                 btn4.onclick = function(){
-                        openProjctForm();
+                    openProjctForm();
                     }
                 projectsContainer.appendChild(btn4);
         const mainBody = document.createElement('div');
@@ -143,7 +143,9 @@ export function addProject(name) {
     projectButton.textContent = name.title;
     projectButton.id = 'project-name';
     projectButton.onclick = function(){
+        removeCurrentInfo();
+        createBody();
         addHeader(name.title);
     }
     projectHolder.appendChild(projectButton);
-    }
+}
