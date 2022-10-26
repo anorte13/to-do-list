@@ -166,7 +166,6 @@ export function openTaskForm() {
             closeContatiner.appendChild(close);
 }
 let parsedTitle;
-
 export function addToProject(title, description, date, priority, project){
     for(let i = 0; i < projects.length; i++){
         if(projects[i].title === `${project}`){
@@ -204,20 +203,3 @@ function validateForm(task, description, date, priority, project) {
         removeForm(box);
     }
 }
-
-
-
-//(task, description, date, priority, project){
-    //const head = document.getElementById('header');
-    //const contain = document.getElementById('container');
-   // const formBox = document.createElement('div');
-
-    //let x = document.forms["myForm"]["task"].value;
-
-   // if(x === ""){
-        //console.log('Please enter information in the fields.')
-        //return false;
-   // } else {
-        //console.log('Everything looks good!');
-       // 
-    //}

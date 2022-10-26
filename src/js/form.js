@@ -27,7 +27,6 @@ export function openProjctForm() {
             title.id = "form-title";
             form.appendChild(title);
 
-            let messages = [];
             const error = document.createElement('div');
             error.id = 'error'
 
@@ -38,18 +37,11 @@ export function openProjctForm() {
             projectName.setAttribute('required', 'required');
 
             const submit = document.createElement("input");
-            submit.setAttribute('type', 'submit');
+            submit.setAttribute('type', 'button');
             submit.id = 'submitButton';
             submit.value = 'Submit';
             submit.onclick = function(){
-                const project = new Project(projectName.value);
-                projects.push(project);
-                addProject(project);
-                head.classList.remove('form-pop');
-                contain.classList.remove('form-pop');
-                head.classList.add('form-removed');
-                contain.classList.add('form-removed');
-                removeForm(formBox);
+                valiateProject(projectName.value);       
             }
             form.appendChild(projectName);
             form.appendChild(submit);
@@ -69,5 +61,26 @@ export function openProjctForm() {
     }
     export function removeForm(form){
         form.remove();
+    }
+    function valiateProject(project){
+        let projectName = document.getElementById('projectName');
+        const head = document.getElementById('header');
+        const contain = document.getElementById('container');
+        const box = document.getElementById('form-box');
+
+        if(projectName.value === ''){
+            alert('Please enter a project name');
+        }
+        else if(projectName !== ''){
+            const projectObject = new Project(project);
+            projects.push(projectObject);
+            addProject(projectObject);
+            head.classList.remove('form-pop');
+            contain.classList.remove('form-pop');
+            head.classList.add('form-removed');
+            contain.classList.add('form-removed');
+            removeForm(box);
+
+        }
     }
     
