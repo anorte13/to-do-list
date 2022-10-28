@@ -1,30 +1,32 @@
 export class Task {
-    constructor(title, description, dueDate, priority, project){
-        this.title = title;
-        this.description = description;
-        this.dueDate = dueDate;
-        this.priority = priority;
-        this.project = project;
-    }
-    projects = [];
+  constructor(title, description, dueDate, priority, project) {
+    this.title = title;
+    this.description = description;
+    this.dueDate = dueDate;
+    this.priority = priority;
+    this.project = project;
+  }
 
-    addToProject(obj){
-        this.projects.push(obj);
-    }
-    getProjects() {
-        return this.projects;
-    }
+  projects = [];
+
+  addToProject(obj) {
+    this.projects.push(obj);
+  }
+
+  getProjects() {
+    return this.projects;
+  }
 }
 export class Project {
-    constructor(title) {
-        this.title = title;
-    }
-    taskList = [];
+  constructor(title) {
+    this.title = title;
+  }
 
-    addTasks(task){
-        this.taskList.push(task);
-    }
-    getTaskList() {
-        return this.taskList;
-    }
+  taskList = [];
+
+  addTasks(task) {}
+
+  getTaskList() {
+    return this.taskList;
+  }
 }
